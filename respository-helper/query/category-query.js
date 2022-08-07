@@ -1,11 +1,11 @@
 import client from "../mongodb-user";
 import mongo, { ObjectId } from "mongodb";
 import { factory } from "../factory";
+import dotenv from "dotenv"
+dotenv.config();
 
 
-
-client;
-const dbName = "categoryProduct";
+const dbName = process.env.db_name;
 
 export const mongodbCategoryQuery = {
   client,

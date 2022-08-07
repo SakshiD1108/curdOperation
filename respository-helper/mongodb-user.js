@@ -4,8 +4,8 @@ dotenv.config();
 
 import { MongoClient } from "mongodb";
 
-const url = "mongodb+srv://inkincaps:InkInCaps%401234@cluster0.fbljc.mongodb.net/test";
-//console.log(url)
+const url = process.env.db_url
+
 
 const client = new MongoClient(url, {
   useNewUrlParser: true,
@@ -14,7 +14,7 @@ const client = new MongoClient(url, {
 client.connect((err) => {});
 
 // Database Name
-const dbName = "categoryProduct" ;
+const dbName = process.env.db_name ;
 
 async function main() {
   // Use connect method to connect to the server
