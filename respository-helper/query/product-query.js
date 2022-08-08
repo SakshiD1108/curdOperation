@@ -31,7 +31,19 @@ export const mongodbProductQuery = {
       const result = await client
         .db(dbName)
         .collection("product")
-        .find().skip((page - 1) * ITEMS_PER_PAGE)
+        .aggregate([
+          {
+            $lookup: {
+              "from": "category",
+              "localField": "categoryId",
+              "foreignField": "_id",
+              "as": "Category"
+
+            }
+          }, {
+            $unwind: "$Category"
+          }
+        ]).skip((page - 1) * ITEMS_PER_PAGE)
         .limit(ITEMS_PER_PAGE).toArray()
       return result;
     } catch (error) {

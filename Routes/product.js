@@ -1,5 +1,6 @@
 import express from "express";
 import { factory } from "../respository-helper/factory";
+import mongo, { ObjectId } from "mongodb";
 
 export const router = express.Router();
 export default router;
@@ -11,7 +12,7 @@ router.post("/", async (request, response) => {
 
     const productName = request.body.productName;
     const description = request.body.description;
-    const categoryId = request.body.categoryId;
+    const categoryId = ObjectId(request.body.categoryId);
 
     const addProduct = await factory
       .getMongodbProduct()
